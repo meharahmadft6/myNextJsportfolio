@@ -6,9 +6,6 @@ import {
   FiSmartphone,
   FiCpu,
   FiZap,
-  FiLayers,
-  FiCloud,
-  FiGitBranch,
   FiStar,
   FiArrowRight,
 } from "react-icons/fi";

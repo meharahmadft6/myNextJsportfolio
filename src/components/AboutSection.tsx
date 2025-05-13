@@ -1,7 +1,7 @@
 // components/AboutSection.tsx
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { FiAward, FiCode, FiCpu, FiSmartphone, FiBook } from "react-icons/fi";
+import { FiCode, FiCpu, FiSmartphone, FiBook } from "react-icons/fi";
 import profileImg from "../../public/me.jpg";
 
 export default function AboutSection() {

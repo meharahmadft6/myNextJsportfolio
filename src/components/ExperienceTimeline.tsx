@@ -2,14 +2,7 @@
 import { motion } from "framer-motion";
 import { useRef } from "react";
 import { useInView } from "framer-motion";
-import {
-  FiArrowRight,
-  FiDatabase,
-  FiCode,
-  FiServer,
-  FiMail,
-  FiImage,
-} from "react-icons/fi";
+import { FiArrowRight, FiDatabase, FiCode, FiServer } from "react-icons/fi";
 
 const experiences = [
   {

@@ -32,7 +32,7 @@ export default function Home() {
         <ExperienceTimeline />
         <ProjectsShowcase />
         <ContactSection />
-        <ChatBot /> // floating or bottom
+        <ChatBot />
       </motion.main>
     </>
   );
