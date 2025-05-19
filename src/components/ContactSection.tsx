@@ -169,7 +169,7 @@ export default function ContactSection() {
                 variants={itemVariants}
                 className="text-gray-300 leading-relaxed"
               >
-                Feel free to reach out anytime via email or phone. I'm always
+                Feel free to reach out anytime via email or phone. I am always
                 open to discussing new projects, creative ideas, or
                 opportunities to be part of your vision.
               </motion.p>
@@ -229,7 +229,7 @@ export default function ContactSection() {
                 variants={itemVariants}
                 className="text-gray-300 leading-relaxed"
               >
-                Let's connect and build something amazing together. Follow me on
+                Lets connect and build something amazing together. Follow me on
                 social platforms for updates on my latest projects and tech
                 insights.
               </motion.p>

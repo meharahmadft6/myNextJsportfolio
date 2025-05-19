@@ -10,15 +10,29 @@ import {
   FiArrowRight,
 } from "react-icons/fi";
 
-// Define the type for skill category keys
+// Define types for the component
 type SkillCategory = "web" | "mobile" | "ai" | "tech";
+
+interface SkillData {
+  icon: React.ReactNode;
+  title: string;
+  color: string;
+  skills: string[];
+  techs?: string[];
+}
+
+interface SkillsData {
+  web: SkillData;
+  mobile: SkillData;
+  ai: SkillData;
+  tech: SkillData;
+}
 
 export default function SkillsSection() {
   const [activeTab, setActiveTab] = useState<SkillCategory>("web");
   const [hoveredSkill, setHoveredSkill] = useState("");
   const controls = useAnimation();
 
-  // Animate the skill cards when section is in view
   useEffect(() => {
     controls.start((i) => ({
       opacity: 1,
@@ -27,8 +41,7 @@ export default function SkillsSection() {
     }));
   }, [controls]);
 
-  // Define skills data to make it more maintainable
-  const skillsData = {
+  const skillsData: SkillsData = {
     web: {
       icon: <FiCode className="text-purple-400 text-3xl" />,
       title: "Web Development",
@@ -40,6 +53,7 @@ export default function SkillsSection() {
         "AWS Integration: S3, SES, EC2",
         "Secure APIs using JWT and middleware",
       ],
+      techs: [],
     },
     mobile: {
       icon: <FiSmartphone className="text-green-400 text-3xl" />,
@@ -52,6 +66,7 @@ export default function SkillsSection() {
         "Geolocation, Weather APIs, Chatbots",
         "Built apps: VetVision, YumYard, MindZap",
       ],
+      techs: [],
     },
     ai: {
       icon: <FiCpu className="text-pink-400 text-3xl" />,
@@ -65,12 +80,13 @@ export default function SkillsSection() {
         "DCGAN for image generation",
         "Built chatbot models with NLP + APIs",
       ],
+      techs: [],
     },
     tech: {
       icon: <FiZap className="text-yellow-300 text-3xl" />,
       title: "Technologies & Tools",
       color: "yellow",
-      skills: [], // Add empty skills array for consistency
+      skills: [],
       techs: [
         "Node.js",
         "Express",
@@ -93,7 +109,6 @@ export default function SkillsSection() {
     },
   };
 
-  // Particle effect background component
   const ParticleBackground = () => {
     return (
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -128,7 +143,6 @@ export default function SkillsSection() {
     );
   };
 
-  // Skill progress bar component
   interface ProgressBarProps {
     skill: string;
     index: number;
@@ -171,18 +185,14 @@ export default function SkillsSection() {
       </motion.div>
     );
   };
+
   return (
     <section className="py-32 px-6 max-w-7xl mx-auto text-white relative overflow-hidden">
-      {/* Animated background */}
       <ParticleBackground />
-
-      {/* Glowing background gradients */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-purple-700/20 blur-3xl -z-10" />
       <div className="absolute bottom-1/4 right-1/3 w-64 h-64 rounded-full bg-blue-700/20 blur-3xl -z-10" />
 
-      {/* Main content */}
       <div className="relative z-10">
-        {/* Header with animated underline */}
         <div className="flex flex-col items-center mb-20">
           <motion.div
             initial={{ width: 0 }}
@@ -219,34 +229,30 @@ export default function SkillsSection() {
           />
         </div>
 
-        {/* Skills tab navigation */}
         <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {(Object.entries(skillsData) as [SkillCategory, any][]).map(
-            ([key, { title, color }]) => (
-              <motion.button
-                key={key}
-                whileHover={{ y: -3 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setActiveTab(key as SkillCategory)}
-                className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
-                  activeTab === key
-                    ? color === "purple"
-                      ? "bg-purple-500/20 text-purple-300 border-purple-500/50"
-                      : color === "green"
-                      ? "bg-green-500/20 text-green-300 border-green-500/50"
-                      : color === "pink"
-                      ? "bg-pink-500/20 text-pink-300 border-pink-500/50"
-                      : "bg-yellow-500/20 text-yellow-300 border-yellow-500/50"
-                    : "bg-white/5 text-gray-300 border-transparent hover:bg-white/10"
-                } border`}
-              >
-                {title}
-              </motion.button>
-            )
-          )}
+          {(Object.keys(skillsData) as SkillCategory[]).map((key) => (
+            <motion.button
+              key={key}
+              whileHover={{ y: -3 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setActiveTab(key)}
+              className={`px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
+                activeTab === key
+                  ? skillsData[key].color === "purple"
+                    ? "bg-purple-500/20 text-purple-300 border-purple-500/50"
+                    : skillsData[key].color === "green"
+                    ? "bg-green-500/20 text-green-300 border-green-500/50"
+                    : skillsData[key].color === "pink"
+                    ? "bg-pink-500/20 text-pink-300 border-pink-500/50"
+                    : "bg-yellow-500/20 text-yellow-300 border-yellow-500/50"
+                  : "bg-white/5 text-gray-300 border-transparent hover:bg-white/10"
+              } border`}
+            >
+              {skillsData[key].title}
+            </motion.button>
+          ))}
         </div>
 
-        {/* Skills content panel */}
         <motion.div
           key={activeTab}
           initial={{ opacity: 0, y: 20 }}
@@ -255,7 +261,6 @@ export default function SkillsSection() {
           transition={{ duration: 0.5 }}
           className="grid lg:grid-cols-2 gap-8"
         >
-          {/* Left panel: Skills visualization */}
           <div className="bg-white/5 p-8 rounded-2xl border border-white/10 backdrop-blur-sm shadow-xl">
             <div className="flex items-center gap-4 mb-6">
               {skillsData[activeTab].icon}
@@ -277,7 +282,7 @@ export default function SkillsSection() {
               </div>
             ) : (
               <div className="flex flex-wrap gap-3 text-gray-200 text-sm">
-                {skillsData.tech.techs.map((tech, i) => (
+                {skillsData.tech.techs?.map((tech, i) => (
                   <motion.span
                     key={i}
                     whileHover={{
@@ -301,9 +306,7 @@ export default function SkillsSection() {
             )}
           </div>
 
-          {/* Right panel: Featured projects or achievements */}
           <div className="bg-white/5 p-8 rounded-2xl border border-white/10 backdrop-blur-sm shadow-xl relative overflow-hidden">
-            {/* Gradient accent */}
             <div
               className={`absolute top-0 left-0 w-full h-1 ${
                 activeTab === "web"
@@ -418,7 +421,6 @@ export default function SkillsSection() {
           </div>
         </motion.div>
 
-        {/* Experience level indicator */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -465,7 +467,6 @@ interface ProjectCardProps {
   color: string;
 }
 
-// Project card component
 function ProjectCard({ title, desc, tech, color }: ProjectCardProps) {
   return (
     <motion.div
