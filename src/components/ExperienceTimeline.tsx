@@ -4,7 +4,19 @@ import { useRef } from "react";
 import { useInView } from "framer-motion";
 import { FiArrowRight, FiDatabase, FiCode, FiServer } from "react-icons/fi";
 
-const experiences = [
+// Define TypeScript interface for experience data
+interface Experience {
+  id: number;
+  role: string;
+  company: string;
+  period: string;
+  location: string;
+  description: string[];
+  technologies: string[];
+  icon: React.ReactNode;
+}
+
+const experiences: Experience[] = [
   {
     id: 1,
     role: "FULL STACK DEVELOPER",
@@ -115,11 +127,11 @@ function ExperienceCard({
   index,
   isInView,
 }: {
-  exp: any;
+  exp: Experience;
   index: number;
   isInView: boolean;
 }) {
-  const cardRef = useRef(null);
+  const cardRef = useRef<HTMLDivElement>(null);
   const isCardInView = useInView(cardRef, { once: true, amount: 0.3 });
 
   return (
@@ -188,7 +200,7 @@ function ExperienceCard({
           </div>
 
           <ul className="space-y-2">
-            {exp.description.map((item: string, i: number) => (
+            {exp.description.map((item, i) => (
               <motion.li
                 key={i}
                 initial={{ x: -20, opacity: 0 }}
@@ -209,7 +221,7 @@ function ExperienceCard({
             transition={{ delay: 0.8 }}
             className="flex flex-wrap gap-2 mt-4"
           >
-            {exp.technologies.map((tech: string, i: number) => (
+            {exp.technologies.map((tech, i) => (
               <motion.span
                 key={i}
                 whileHover={{ scale: 1.05 }}
