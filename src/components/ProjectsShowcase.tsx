@@ -86,8 +86,7 @@ export default function ProjectsShowcase() {
   const [activeFilter, setActiveFilter] = useState<string>("All");
   const [filteredProjects, setFilteredProjects] = useState<Project[]>(projects);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [ref, inView] = useInView({ threshold: 0.1, triggerOnce: true });
-
+  const [ref] = useInView({ threshold: 0.1, triggerOnce: true });
   // Extract unique tags for filter
   const allTags = [
     "All",
@@ -173,11 +172,10 @@ export default function ProjectsShowcase() {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           ref={ref}
         >
-          {filteredProjects.map((project, index) => (
+          {filteredProjects.map((project) => (
             <ProjectCard
               key={project.id}
               project={project}
-              index={index}
               setSelectedProject={setSelectedProject}
             />
           ))}
@@ -212,14 +210,12 @@ export default function ProjectsShowcase() {
 
 function ProjectCard({
   project,
-  index,
   setSelectedProject,
 }: {
   project: Project;
-  index: number;
   setSelectedProject: (project: Project) => void;
 }) {
-  const [ref, inView] = useInView({
+  const [ref] = useInView({
     threshold: 0.1,
     triggerOnce: true,
   });
