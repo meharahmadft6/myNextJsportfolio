@@ -187,8 +187,8 @@ export default function ChatBot() {
                   <div className="bg-gray-800 px-4 py-3 rounded-xl max-w-[85%]">
                     <span className="text-purple-300 font-medium">Ahmad:</span>{" "}
                     <p>
-                      Hi there! 👋 I'm Ahmad. Ask me anything about my skills,
-                      projects, or background!
+                      Hi there! 👋 I am Ahmad. Ask me anything about my
+                      skills, projects, or background!
                     </p>
                   </div>
                 </div>

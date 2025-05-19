@@ -95,10 +95,11 @@ export default function AboutSection() {
             className="space-y-6"
           >
             <p className="text-lg text-gray-300 leading-relaxed">
-              I'm <strong className="text-white">Muhammad Ahmad Sadaqat</strong>
-              , a passionate Full Stack Developer and AI enthusiast based in
-              Lahore, Pakistan. With diverse experience in web and mobile
-              development, I create impactful digital solutions.
+              I am{" "}
+              <strong className="text-white">Muhammad Ahmad Sadaqat</strong>, a
+              passionate Full Stack Developer and AI enthusiast based in Lahore,
+              Pakistan. With diverse experience in web and mobile development, I
+              create impactful digital solutions.
             </p>
 
             {/* Education Highlight */}
